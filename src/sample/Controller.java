@@ -4,28 +4,42 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Circle;
 
 public class Controller {
 
     @FXML
     AnchorPane graph;
+    Vertex vertexTemp;
 
     public void onGraphPressed(MouseEvent mouseEvent) {
-        graph.getChildren().add(createVertex(mouseEvent));
+        if(mouseEvent.isPrimaryButtonDown())
+            createAndAddVertex(mouseEvent);
     }
 
+    public void onGraphDragDetected(MouseEvent mouseEvent) {
+        if(mouseEvent.isPrimaryButtonDown())
+            vertexTemp = createAndAddVertex(mouseEvent);
+    }
 
-    private Node createVertex(MouseEvent mouseEvent) {
+    public void onGraphDragged(MouseEvent mouseEvent) {
+        if(vertexTemp != null) {
+            vertexTemp.setLayoutX(mouseEvent.getX());
+            vertexTemp.setLayoutY(mouseEvent.getY());
+        }
+    }
+
+    public void onGraphReleased(MouseEvent mouseEvent) {
+        vertexTemp = null;
+    }
+
+    private Vertex createAndAddVertex(MouseEvent mouseEvent) {
         Vertex vertex = new Vertex(mouseEvent.getX(), mouseEvent.getY());
-        vertex.setShape(new Circle(30));
-        vertex.setPrefSize(50,40);
 
 
 
         vertex.setOnDragDetected(e -> onVertexDraggedDetected(e, vertex));
         vertex.setOnMouseDragged(e -> onVertexDragged(e, vertex));
-
+        graph.getChildren().add(vertex);
         return vertex;
     }
 

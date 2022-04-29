@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.scene.control.Button;
+import javafx.scene.shape.Circle;
 
 public class Vertex extends Button {
 
@@ -10,6 +11,8 @@ public class Vertex extends Button {
     public Vertex(Double x, Double y) {
         setLayoutX(x);
         setLayoutY(y);
+        setShape(new Circle(30));
+        setPrefSize(50,40);
         translateXProperty().bind(widthProperty().divide(-2));
         translateYProperty().bind(heightProperty().divide(-2));
         id = count++;
