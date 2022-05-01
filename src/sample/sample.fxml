@@ -2,7 +2,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <BorderPane
         fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml">
+          xmlns:fx="http://javafx.com/fxml"
+        stylesheets="@styles.css">
     <center>
         <AnchorPane fx:id="graph" style="-fx-background-color:
             linear-gradient(#4568DC, #B06AB3),
